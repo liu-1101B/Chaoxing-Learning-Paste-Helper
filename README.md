@@ -6,7 +6,7 @@
 
 1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 浏览器扩展
 2. 点击下方链接安装脚本：
-   - [从 GitHub 安装](https://raw.githubusercontent.com/2750527986liu-maker/Chaoxing-Learning-Paste-Helper/main/chaoxing-ai-paste-unlock.user.js)
+   - [从 GitHub 安装](https://raw.githubusercontent.com/liu-1101B/Chaoxing-Learning-Paste-Helper/main/chaoxing-ai-paste-unlock.user.js)
 3. 打开超星学习通页面，直接 Ctrl+V 即可粘贴
 
 ## 功能
@@ -35,4 +35,8 @@
 
 ## 声明
 
-本工具仅供日常作业编辑便利使用，请勿用于考试作弊。使用本脚本产生的任何后果由用户自行�
+本工具仅供日常作业编辑便利使用，请勿用于考试作弊。使用本脚本产生的任何后果由用户自行承担。
+
+## License
+
+MIT

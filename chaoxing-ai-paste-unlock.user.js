@@ -1,15 +1,14 @@
 // ==UserScript==
 // @name         超星学习通复制粘贴助手 - AI评测页面粘贴限制解除 (Chaoxing Copy Paste Helper)
-// @namespace    https://github.com/2750527986liu-maker/Chaoxing-Learning-Paste-Helper
+// @namespace    https://github.com/liu-1101B/Chaoxing-Learning-Paste-Helper
 // @version      1.0
 // @description  超星学习通复制粘贴助手。解除超星学习通AI评测页面、作业、考试的粘贴限制。支持Ctrl+V粘贴、Ctrl+Shift+V粘贴、悬浮按钮一键粘贴。针对 mooc2-ans.chaoxing.com AI评测答题页面，capture阶段拦截paste + 原生setter注入 + InputEvent模拟打字。
 // @author       2750527986liu-maker
 // @match        *://mooc2-ans.chaoxing.com/*
 // @match        *://*.chaoxing.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=chaoxing.com
-// @downloadURL  https://raw.githubusercontent.com/2750527986liu-maker/Chaoxing-Learning-Paste-Helper/main/chaoxing-ai-paste-unlock.user.js
-// @updateURL    https://raw.githubusercontent.com/2750527986liu-maker/Chaoxing-Learning-Paste-Helper/main/chaoxing-ai-paste-unlock.user.js
-// @updateURL    https://github.com/2750527986liu-maker/Chaoxing-AI-Paste-Unlock/raw/main/chaoxing-ai-paste-unlock.user.js
+// @downloadURL  https://raw.githubusercontent.com/liu-1101B/Chaoxing-Learning-Paste-Helper/main/chaoxing-ai-paste-unlock.user.js
+// @updateURL    https://raw.githubusercontent.com/liu-1101B/Chaoxing-Learning-Paste-Helper/main/chaoxing-ai-paste-unlock.user.js
 // @run-at       document-end
 // @grant        GM_log
 // @license      MIT
@@ -301,4 +300,29 @@
     // =============================================
     function startPeriodicScan() {
         let count = 0;
-      
+        const timer = setInterval(() => {
+            count++;
+            scanAndCleanTextareas();
+            if (count >= 30) clearInterval(timer);
+        }, 1000);
+    }
+
+    // =============================================
+    // 主初始化
+    // =============================================
+    function init() {
+        installPasteInterceptor();
+        scanAndCleanTextareas();
+        startObserver();
+        startPeriodicScan();
+        injectFloatingButton();
+        installHotkey();
+        LOG('🎉 初始化完成！现在可以 Ctrl+V 或点击右下角蓝色按钮粘贴');
+    }
+
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        init();
+    } else {
+        window.addEventListener('DOMContentLoaded', init);
+    }
+})();
